@@ -38,7 +38,7 @@ namespace PornWebApi.Domain
                 pornPageItem.ViewKey = contentUrl.Substring(contentUrl.IndexOf("=", StringComparison.Ordinal) + 1);
                 var imgNode = aNode.ChildNodes.FindFirst("img");
                 pornPageItem.Title = imgNode.Attributes["title"].Value;
-                pornPageItem.ImgUrl = imgNode.Attributes["src"].Value;
+                pornPageItem.ImgUrl = imgNode.Attributes["src"].Value.Replace("1_", "");
 
                 string allInfo = listChannel.InnerText;
 
