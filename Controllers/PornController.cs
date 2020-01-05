@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace PornWebApi.Controllers
         }
         
         [HttpGet("page")]
-        public async Task<PornPage> Load91PornPageByCategary([FromQuery]string category, [FromQuery]int page, [FromQuery]string m, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<List<PornPageItem>> Load91PornPageByCategary([FromQuery]string category, [FromQuery]int page, [FromQuery]string m, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await _service.LoadPornPageByCategory(category, page, m, cancellationToken);
         }

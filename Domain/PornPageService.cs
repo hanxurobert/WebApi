@@ -12,7 +12,7 @@ namespace PornWebApi.Domain
 {
     public class PornPageService : IPornPageService
     {
-        public async Task<PornPage> LoadPornPageByCategory(string category, int page, string m, CancellationToken cancellationToken)
+        public async Task<List<PornPageItem>> LoadPornPageByCategory(string category, int page, string m, CancellationToken cancellationToken)
         {
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Referrer = new Uri("http://www.91porn.com/v.php");
@@ -25,7 +25,7 @@ namespace PornWebApi.Domain
             pageDocument.LoadHtml(html);
 
             HtmlNode body = pageDocument.GetElementbyId("fullside");
-            var pornPage = new PornPage();
+
             var pageItems = new List<PornPageItem>();
 
             var listChannels = body.SelectNodes("//*[@class='listchannel']");
@@ -52,8 +52,7 @@ namespace PornWebApi.Domain
                 pornPageItem.Info = info.Replace("还未被评分", "");
                 pageItems.Add(pornPageItem);
             });
-            pornPage.Items = pageItems;
-            return pornPage;
+            return pageItems;
         }
     }
 }
