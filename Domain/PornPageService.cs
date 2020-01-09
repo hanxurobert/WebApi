@@ -47,9 +47,19 @@ namespace PornWebApi.Domain
                 String duration = allInfo.Substring(sindex + 3, 5);
                 pornPageItem.Duration = duration;
 
-                int start = allInfo.IndexOf("添加时间", StringComparison.Ordinal);
-                String info = allInfo.Substring(start);
-                pornPageItem.Info = info.Replace("还未被评分", "");
+                string info = allInfo.Replace("\n", "")
+                                     .Replace(" ", "")
+                                     .Replace("&nbsp;", "");
+
+                int start = info.IndexOf("添加时间", StringComparison.Ordinal);
+                int authorIndex = info.IndexOf("作者", StringComparison.Ordinal);
+                int viewsIndex = info.IndexOf("查看", StringComparison.Ordinal);
+                int favoriteIndex = info.IndexOf("收藏", StringComparison.Ordinal);
+
+                pornPageItem.AddedTime = info.Substring(start, authorIndex - start);
+                pornPageItem.Author = info.Substring(authorIndex, viewsIndex - authorIndex);
+                pornPageItem.ViewsNumber = info.Substring(viewsIndex, favoriteIndex - viewsIndex);
+                
                 pageItems.Add(pornPageItem);
             });
             return pageItems;

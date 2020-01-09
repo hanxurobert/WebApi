@@ -19,7 +19,11 @@ namespace PornWebApi.Models
 
         public string Duration { get; set; }
 
-        public string Info { get; set; }
+        public string AddedTime { get; set; }
+
+        public string Author { get; set; }
+
+        public string ViewsNumber { get; set; }
 
     }
 }
