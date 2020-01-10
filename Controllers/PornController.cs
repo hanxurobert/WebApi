@@ -29,5 +29,11 @@ namespace PornWebApi.Controllers
         {
             return await _service.LoadPornPageByCategory(category, page, m, cancellationToken);
         }
+
+        [HttpGet("video")]
+        public async Task<PornVideoItem> GetVideoUrl([FromQuery]string viewKey, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await _service.AnalyzeVideoUrl(viewKey, cancellationToken);
+        }
     }
 }

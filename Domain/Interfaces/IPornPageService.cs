@@ -8,5 +8,7 @@ namespace PornWebApi.Domain.Interfaces
     public interface IPornPageService
     {
         Task<List<PornPageItem>> LoadPornPageByCategory(string category, int page, string m, CancellationToken cancellationToken);
+
+        Task<PornVideoItem> AnalyzeVideoUrl(string viewKey, CancellationToken cancellationToken);
     }
 }
